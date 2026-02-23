@@ -145,5 +145,6 @@ shape = SubResource("BoxShape3D_xwkvk")
 
 [node name="Player" parent="." unique_id=1936879637 instance=ExtResource("2_xwkvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
+Debugging = false
 
 [node name="LevalGui" parent="." unique_id=1337565576 instance=ExtResource("3_xwkvk")]

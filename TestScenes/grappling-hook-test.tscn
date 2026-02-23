@@ -28,6 +28,7 @@ shape = SubResource("BoxShape3D_uqfgc")
 
 [node name="Player" parent="." unique_id=1936879637 instance=ExtResource("1_d4qvt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5213015, 3.5538416)
+Debugging = false
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=2033577995 groups=["Hookable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32132435, 6.3166814, -2.5409274)

@@ -1,4 +1,5 @@
 using Godot;
+using GraplingProject.player.GrapplingHook;
 
 namespace GraplingProject.player;
 
@@ -8,29 +9,57 @@ public partial class Player : CharacterBody3D
     [Export] public float JumpVelocity = 4.5f;
     [Export] public float MouseSensitivity = 0.002f;
     [Export] public float MaxRaycastDistance = 200.0f;
-    [Export] public float GrappleSpeed = 14.0f;
+    [Export] public float GrappleSpeed = 10.0f;
+    [Export] public float GrappleRopeRadius = 0.01f;
     [Export] public bool Debugging;
     [Export] public Node3D Head;
 
-    private bool _grappling;
-    private Vector3 _grapplePosition;
+    private const float RopeOffsetY = -0.4f;
+    private const float RopeOffsetZ = -0.3f;
+    private const float RespawnThresholdY = -5f;
+    private static readonly Vector3 SpawnPosition = new(0, 1.5f, 4);
+
+    private GrapplingHook.GrapplingHook _grapplingHook;
+    private Camera3D _camera;
 
     public override void _Ready()
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
+        _camera = GetNode<Camera3D>("Head/Camera3D");
+        _grapplingHook = new GrapplingHook.GrapplingHook(MaxRaycastDistance, GrappleSpeed, GrappleRopeRadius);
     }
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        CheckForMouseClick(@event);
-        CheckForMouseMovement(@event);
+        if (@event is InputEventMouseMotion mouseMotion)
+            HandleMouseLook(mouseMotion);
+
+        if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true })
+            HandleGrappleInput();
     }
 
-    private void CheckForMouseMovement(InputEvent @event)
+    public override void _PhysicsProcess(double delta)
     {
-        if (@event is not InputEventMouseMotion mouseMotion) return;
-        RotateY(-mouseMotion.Relative.X * MouseSensitivity);
+        if (_grapplingHook.IsGrappling)
+        {
+            if (Input.IsActionJustPressed("ui_accept"))
+            {
+                _grapplingHook.Cancel();
+                return;
+            }
 
+            _grapplingHook.ProcessMovement(this);
+            _grapplingHook.UpdateRope(GetRopeOrigin());
+        }
+        else
+        {
+            HandleMovement(delta);
+        }
+    }
+
+    private void HandleMouseLook(InputEventMouseMotion mouseMotion)
+    {
+        RotateY(-mouseMotion.Relative.X * MouseSensitivity);
         Head.RotateX(-mouseMotion.Relative.Y * MouseSensitivity);
 
         var rotation = Head.Rotation;
@@ -38,134 +67,34 @@ public partial class Player : CharacterBody3D
         Head.Rotation = rotation;
     }
 
-    private void CheckForMouseClick(InputEvent @event)
+    private void HandleGrappleInput()
     {
-        if (@event is not InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true }) return;
-
-        HandleGrapplingHook();
-    }
-
-    private void HandleGrapplingHook()
-    {
-        if (_grappling)
-        {
-            _grappling = false;
-            return;
-        }
-
-        var camera = GetNode<Camera3D>("Head/Camera3D");
-        var physicsRayQueryParameters3D = new PhysicsRayQueryParameters3D();
-        physicsRayQueryParameters3D.From = camera.GlobalTransform.Origin;
-        physicsRayQueryParameters3D.To =
-            physicsRayQueryParameters3D.From - camera.GlobalTransform.Basis.Z * MaxRaycastDistance;
-
         var spaceState = GetWorld3D().DirectSpaceState;
-        var result = spaceState.IntersectRay(physicsRayQueryParameters3D);
+        var result = _grapplingHook.TryFireOrCancel(_camera, spaceState, GetTree());
 
-        if (Debugging & result.Count <= 0)
-        {
-            GD.Print("=== RAYCAST MISS ===");
-            GD.Print("Ray From: " + physicsRayQueryParameters3D.From);
-            GD.Print("Ray To: " + physicsRayQueryParameters3D.To);
-            GD.Print("Max Raycast Distance: " + MaxRaycastDistance);
-            GD.Print("No objects hit within range");
-            return;
-        }
+        if (result == null) return;
 
-        var hitObject = (Node3D)result["collider"];
-
-        if (!hitObject.GetGroups().Contains("Hookable")) return;
-
-        _grappling = true;
-        _grapplePosition = physicsRayQueryParameters3D.To;
-        GD.Print("Grapple hit: " + hitObject.Name);
+        GD.Print("Grapple hit: " + ((Node3D)result["collider"]).Name);
 
         if (!Debugging) return;
-        var hitPosition = (Vector3)result["position"];
-        var hitNormal = (Vector3)result["normal"];
-        var hitDistance = physicsRayQueryParameters3D.From.DistanceTo(hitPosition);
-
-        GD.Print("=== RAYCAST HIT ===");
-        GD.Print("Hit Distance: " + hitDistance.ToString("F2") + " units (max: " + MaxRaycastDistance + ")");
-        GD.Print("Hit Position: " + hitPosition);
-        GD.Print("Hit Normal: " + hitNormal);
-        GD.Print("Hit Object Name: " + hitObject.Name);
-        GD.Print("Hit Object Type: " + hitObject.GetType().Name);
-        GD.Print("Hit Object Path: " + hitObject.GetPath());
-        GD.Print("Hit Object Groups: " + string.Join(", ", hitObject.GetGroups()));
-
-        DrawHitPointDebug(hitPosition);
+        GrappleDebug.LogRaycastHit(result, _camera.GlobalTransform.Origin, MaxRaycastDistance);
+        GrappleDebug.DrawHitMarker((Vector3)result["position"], GetTree());
     }
 
-    private void DrawHitPointDebug(Vector3 hitPosition)
-    {
-        var hitMarker = new MeshInstance3D();
-        hitMarker.Mesh = new SphereMesh() { Radius = 0.1f, Height = 0.2f };
-
-        var material = new StandardMaterial3D();
-        material.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
-        material.AlbedoColor = new Color(0, 1, 0);
-        hitMarker.MaterialOverride = material;
-
-        GetTree().Root.AddChild(hitMarker);
-        hitMarker.GlobalPosition = hitPosition;
-
-        GetTree().CreateTimer(2.0).Timeout += () =>
-        {
-            if (IsInstanceValid(hitMarker))
-            {
-                hitMarker.QueueFree();
-            }
-        };
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        if (_grappling)
-        {
-            HandlePlayerGrappling();
-        }
-        else
-        {
-            HandlePlayerMovement(delta);
-        }
-    }
-
-    private void HandlePlayerGrappling()
-    {
-        var toGrapple = _grapplePosition - GlobalPosition;
-        var directionToGrapple = toGrapple.Normalized();
-        Velocity = directionToGrapple * GrappleSpeed;
-
-        MoveAndSlide();
-
-        var toGrappleAfterMove = _grapplePosition - GlobalPosition;
-        var closeEnough = toGrappleAfterMove.Length() < 1.5f;
-        var overshot = toGrapple.Dot(toGrappleAfterMove) < 0;
-
-        if (closeEnough || overshot)
-        {
-            _grappling = false;
-        }
-    }
-
-    private void HandlePlayerMovement(double delta)
+    private void HandleMovement(double delta)
     {
         var moveSpeed = Input.IsActionPressed("KEY_SPRINT") ? Speed * 1.5f : Speed;
         var velocity = Velocity;
 
         if (!IsOnFloor())
-        {
             velocity += GetGravity() * (float)delta;
-        }
 
         if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-        {
             velocity.Y = JumpVelocity;
-        }
 
         var inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         var direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+
         if (direction != Vector3.Zero)
         {
             velocity.X = direction.X * moveSpeed;
@@ -179,9 +108,21 @@ public partial class Player : CharacterBody3D
 
         Velocity = velocity;
         MoveAndSlide();
-        if (!(Position.Y <= -5)) return;
-        Position = new Vector3(0, 1.5f, 4);
-        RotationDegrees = new Vector3(0, 0, 0);
-        Head.RotationDegrees = new Vector3(0, 0, 0);
+        CheckRespawn();
+    }
+
+    private void CheckRespawn()
+    {
+        if (Position.Y > RespawnThresholdY) return;
+        Position = SpawnPosition;
+        RotationDegrees = Vector3.Zero;
+        Head.RotationDegrees = Vector3.Zero;
+    }
+
+    private Vector3 GetRopeOrigin()
+    {
+        return _camera.GlobalPosition
+               + _camera.GlobalTransform.Basis.Y * RopeOffsetY
+               + _camera.GlobalTransform.Basis.Z * RopeOffsetZ;
     }
 }
