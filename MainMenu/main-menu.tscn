@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://71vx80fm5fbx"]
+
+[ext_resource type="Script" uid="uid://bvyn206bghvqy" path="res://MainMenu/MainMenu.cs" id="1_4wxug"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wxug"]
+bg_color = Color(0.099985994, 0.09998601, 0.099985965, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bk54y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wxug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bypxa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6xcjq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7nxm"]
+
+[node name="MainMenu" type="Node2D" unique_id=1044955928 node_paths=PackedStringArray("StartButton", "QuitButton")]
+script = ExtResource("1_4wxug")
+StartButton = NodePath("CanvasLayer/MenuOptions/MarginContainer/HBoxContainer/Start")
+QuitButton = NodePath("CanvasLayer/MenuOptions/MarginContainer/HBoxContainer/Quit")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=1211772888]
+
+[node name="Panel" type="Panel" parent="Background" unique_id=1342033091]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4wxug")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=427980205]
+follow_viewport_enabled = true
+
+[node name="MenuOptions" type="PanelContainer" parent="CanvasLayer" unique_id=403712945]
+process_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -230.0
+offset_right = 1930.86
+offset_bottom = 11.00061
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MenuOptions" unique_id=1169104046]
+layout_mode = 2
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_top = 63
+theme_override_constants/margin_right = 42
+theme_override_constants/margin_bottom = 63
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MenuOptions/MarginContainer" unique_id=1460136207]
+layout_mode = 2
+theme_override_constants/separation = 120
+
+[node name="Paused" type="Label" parent="CanvasLayer/MenuOptions/MarginContainer/HBoxContainer" unique_id=845126059]
+layout_mode = 2
+theme_override_font_sizes/font_size = 84
+text = "Runshift"
+
+[node name="Start" type="Button" parent="CanvasLayer/MenuOptions/MarginContainer/HBoxContainer" unique_id=26227732]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.26439264, 0.35357296, 0.10953971, 1)
+theme_override_colors/font_hover_color = Color(0.21093419, 0.2853392, 0.08066652, 1)
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bk54y")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4wxug")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bypxa")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_6xcjq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v7nxm")
+text = "Start"
+
+[node name="Quit" type="Button" parent="CanvasLayer/MenuOptions/MarginContainer/HBoxContainer" unique_id=1559680899]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.26439264, 0.35357296, 0.10953971, 1)
+theme_override_colors/font_hover_color = Color(0.21093419, 0.2853392, 0.08066652, 1)
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bk54y")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4wxug")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bypxa")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_6xcjq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v7nxm")
+text = "Quit"

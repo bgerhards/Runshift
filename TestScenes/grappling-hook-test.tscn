@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://c1w8gcp8ourk1"]
+
+[ext_resource type="PackedScene" uid="uid://m4vq7nq1nk2x" path="res://player/player.tscn" id="1_d4qvt"]
+[ext_resource type="PackedScene" uid="uid://7gwi5250rdf" path="res://LevelGui/leval_gui.tscn" id="2_uqfgc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xjgad"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqfgc"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uqfgc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3l1ul"]
+
+[node name="GrapplingHookTest" type="Node2D" unique_id=1076154099]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=740460403]
+transform = Transform3D(1, 0, 0, 0, 0.5264068, 0.85023284, 0, -0.85023284, 0.5264068, -5, 56, 30.243607)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=113165607]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1959394213]
+mesh = SubResource("BoxMesh_xjgad")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=886422616]
+shape = SubResource("BoxShape3D_uqfgc")
+
+[node name="Player" parent="." unique_id=1936879637 instance=ExtResource("1_d4qvt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5213015, 3.5538416)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=2033577995 groups=["Hookable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32132435, 6.3166814, -2.5409274)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2" unique_id=1143219847]
+mesh = SubResource("BoxMesh_uqfgc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1140784335]
+shape = SubResource("BoxShape3D_3l1ul")
+
+[node name="LevalGui" parent="." unique_id=1337565576 instance=ExtResource("2_uqfgc")]

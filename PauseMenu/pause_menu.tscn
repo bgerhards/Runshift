@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://cq2tyvsdsvnjs"]
+
+[ext_resource type="Script" uid="uid://dsuuxbl0b51pb" path="res://PauseMenu/PauseMenu.cs" id="1_tobvk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwkvk"]
+bg_color = Color(0.06053035, 0.06053035, 0.060530342, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwkvk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c651c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wy1v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfbq2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4dugh"]
+
+[node name="PauseMenu" type="PanelContainer" unique_id=1205343455 node_paths=PackedStringArray("ResumeButton", "QuitButton")]
+process_mode = 3
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -230.0
+offset_right = 1930.86
+offset_bottom = 11.00061
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_xwkvk")
+script = ExtResource("1_tobvk")
+ResumeButton = NodePath("MarginContainer/HBoxContainer/Resume")
+QuitButton = NodePath("MarginContainer/HBoxContainer/Quit")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1078082558]
+layout_mode = 2
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_top = 63
+theme_override_constants/margin_right = 42
+theme_override_constants/margin_bottom = 63
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1782043747]
+layout_mode = 2
+theme_override_constants/separation = 120
+
+[node name="Paused" type="Label" parent="MarginContainer/HBoxContainer" unique_id=296840775]
+layout_mode = 2
+theme_override_font_sizes/font_size = 84
+text = "Paused"
+
+[node name="Resume" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1722254299]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.26439264, 0.35357296, 0.10953971, 1)
+theme_override_colors/font_hover_color = Color(0.21093419, 0.2853392, 0.08066652, 1)
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xwkvk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_c651c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3wy1v")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_kfbq2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4dugh")
+text = "Resume"
+
+[node name="Quit" type="Button" parent="MarginContainer/HBoxContainer" unique_id=108761300]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.26439264, 0.35357296, 0.10953971, 1)
+theme_override_colors/font_hover_color = Color(0.21093419, 0.2853392, 0.08066652, 1)
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xwkvk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_c651c")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3wy1v")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_kfbq2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4dugh")
+text = "Quit"

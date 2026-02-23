@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://7gwi5250rdf"]
+
+[ext_resource type="PackedScene" uid="uid://b472bmw2cyyk5" path="res://Crosshair/crosshair.tscn" id="1_8urr5"]
+[ext_resource type="PackedScene" uid="uid://cq2tyvsdsvnjs" path="res://PauseMenu/pause_menu.tscn" id="2_h4uld"]
+
+[node name="LevalGui" type="CanvasLayer" unique_id=1337565576]
+
+[node name="Crosshair" parent="." unique_id=2130178000 instance=ExtResource("1_8urr5")]
+
+[node name="PauseMenu" parent="." unique_id=1205343455 instance=ExtResource("2_h4uld")]
