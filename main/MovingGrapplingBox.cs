@@ -25,16 +25,15 @@ public partial class MovingGrapplingBox : AnimatableBody3D
         moveTween.TweenProperty(this, "global_position", StartPosition, Speed)
             .SetTrans(Tween.TransitionType.Linear)
             .SetEase(Tween.EaseType.In)
-            .SetDelay(0.5f);
+            .SetDelay(1f);
 
         moveTween.TweenProperty(this, "global_position", Position2, Speed)
-            .SetTrans(Tween.TransitionType.Linear)
-            .SetDelay(0.5f);
+            .SetTrans(Tween.TransitionType.Linear);
 
         moveTween.TweenProperty(this, "global_position", EndPosition, Speed)
             .SetTrans(Tween.TransitionType.Linear)
             .SetEase(Tween.EaseType.Out)
-            .SetDelay(0.5f);
+            .SetDelay(1f);
 
         moveTween.TweenProperty(this, "global_position", Position2, Speed)
             .SetTrans(Tween.TransitionType.Linear);
