@@ -8,5 +8,8 @@ public partial class Checkpoint : Area3D
 
     public void _on_body_entered(Node3D body){
         GetNode<CheckpointManager>("/root/CheckpointManager").SetCheckpoint(CheckpointNumber);
+        var signalManager = GetNode<GraplingProject.SignalManager.SignalManager>("/root/SignalManager");
+        signalManager.EmitCheckpointReached(CheckpointNumber);
+        signalManager.EmitScreenMessage($"Checkpoint {CheckpointNumber} reached");
     }
 }

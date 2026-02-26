@@ -21,12 +21,17 @@ public partial class Player : CharacterBody3D
 
     private GrapplingHook.GrapplingHook _grapplingHook;
     private Camera3D _camera;
+    private Label _crosshairSymbol;
+
+    private static readonly Color DefaultCrosshairColor = Colors.White;
+    private static readonly Color HookableCrosshairColor = Colors.Green;
 
     public override void _Ready()
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
         _camera = GetNode<Camera3D>("Head/Camera3D");
         _grapplingHook = new GrapplingHook.GrapplingHook(MaxRaycastDistance, GrappleSpeed, GrappleRopeRadius);
+        _crosshairSymbol = GetNode<Label>("/root/Main/LevalGui/Crosshair/Symbol");
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -40,6 +45,8 @@ public partial class Player : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        UpdateCrosshairColor();
+
         if (_grapplingHook.IsGrappling)
         {
             if (Input.IsActionJustPressed("ui_accept"))
@@ -55,6 +62,13 @@ public partial class Player : CharacterBody3D
         {
             HandleMovement(delta);
         }
+    }
+
+    private void UpdateCrosshairColor()
+    {
+        var spaceState = GetWorld3D().DirectSpaceState;
+        var isHookable = _grapplingHook.IsLookingAtHookable(_camera, spaceState);
+        _crosshairSymbol.Modulate = isHookable ? HookableCrosshairColor : DefaultCrosshairColor;
     }
 
     private void HandleMouseLook(InputEventMouseMotion mouseMotion)

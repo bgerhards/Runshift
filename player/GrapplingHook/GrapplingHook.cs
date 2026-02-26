@@ -27,6 +27,23 @@ public class GrapplingHook
             return null;
         }
 
+        var result = RaycastForHookable(camera, spaceState);
+        if (result == null) return null;
+
+        IsGrappling = true;
+        GrapplePoint = (Vector3)result["position"];
+        _rope.Create(tree);
+
+        return result;
+    }
+
+    public bool IsLookingAtHookable(Camera3D camera, PhysicsDirectSpaceState3D spaceState)
+    {
+        return RaycastForHookable(camera, spaceState) != null;
+    }
+
+    private Dictionary RaycastForHookable(Camera3D camera, PhysicsDirectSpaceState3D spaceState)
+    {
         var query = new PhysicsRayQueryParameters3D
         {
             From = camera.GlobalTransform.Origin,
@@ -37,13 +54,7 @@ public class GrapplingHook
         if (result.Count <= 0) return null;
 
         var hitObject = (Node3D)result["collider"];
-        if (!hitObject.GetGroups().Contains("Hookable")) return null;
-
-        IsGrappling = true;
-        GrapplePoint = (Vector3)result["position"];
-        _rope.Create(tree);
-
-        return result;
+        return hitObject.GetGroups().Contains("Hookable") ? result : null;
     }
 
     public bool ProcessMovement(CharacterBody3D player)
