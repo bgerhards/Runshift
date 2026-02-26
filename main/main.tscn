@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://m4vq7nq1nk2x" path="res://player/player.tscn" id="2_xwkvk"]
 [ext_resource type="PackedScene" uid="uid://c63850s55b2l8" path="res://Checkpoint/Checkpoint.tscn" id="3_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://7gwi5250rdf" path="res://LevelGui/leval_gui.tscn" id="3_xwkvk"]
+[ext_resource type="Script" uid="uid://3dmmd6wv8j60" path="res://main/MovingGrapplingBox.cs" id="4_kfbq2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4hihk"]
 
@@ -309,6 +310,21 @@ shape = SubResource("ConcavePolygonShape3D_3wy1v")
 [node name="Checkpoint001" parent="Floors/Floor004" unique_id=1814078786 instance=ExtResource("3_3wy1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06795311, 4.83142, 3.494297)
 CheckpointNumber = 1
+
+[node name="SecretBox" type="AnimatableBody3D" parent="." unique_id=997195909 groups=["Hookable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+collision_layer = 4
+script = ExtResource("4_kfbq2")
+StartPosition = Vector3(0, 7, 0)
+Position2 = Vector3(31, 7, -34)
+EndPosition = Vector3(20, 7, -60)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SecretBox" unique_id=895903929]
+mesh = SubResource("BoxMesh_pjrb6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SecretBox" unique_id=700240970]
+shape = SubResource("BoxShape3D_xwkvk")
 
 [node name="Player" parent="." unique_id=1936879637 instance=ExtResource("2_xwkvk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
