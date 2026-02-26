@@ -1,4 +1,5 @@
 using Godot;
+using GraplingProject.Checkpoint;
 using GraplingProject.player.GrapplingHook;
 
 namespace GraplingProject.player;
@@ -16,8 +17,7 @@ public partial class Player : CharacterBody3D
 
     private const float RopeOffsetY = -0.4f;
     private const float RopeOffsetZ = -0.3f;
-    private const float RespawnThresholdY = -5f;
-    private static readonly Vector3 SpawnPosition = new(0, 1.5f, 4);
+    private const float RespawnThresholdY = -15f;
 
     private GrapplingHook.GrapplingHook _grapplingHook;
     private Camera3D _camera;
@@ -114,7 +114,8 @@ public partial class Player : CharacterBody3D
     private void CheckRespawn()
     {
         if (Position.Y > RespawnThresholdY) return;
-        Position = SpawnPosition;
+        
+        Position = GetNode<CheckpointManager>("/root/CheckpointManager").GetCheckpointVector3();
         RotationDegrees = Vector3.Zero;
         Head.RotationDegrees = Vector3.Zero;
     }
