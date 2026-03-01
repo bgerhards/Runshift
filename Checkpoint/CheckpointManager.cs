@@ -8,7 +8,7 @@ public partial class CheckpointManager : Node
 
     private static readonly Vector3[] CheckpointPositions =
     [
-        new(0f, 1.5f, 4f),
+        new(0f, 6.1f, 4f),
         new(20f, 2f, -60f)
     ];
     

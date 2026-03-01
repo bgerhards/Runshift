@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://pehlfvuympre"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1xlb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ye6dw"]
+material = SubResource("StandardMaterial3D_m1xlb")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_50vsx"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06ah0"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eokjp"]
+material = SubResource("StandardMaterial3D_06ah0")
+top_radius = 0.11
+bottom_radius = 0.1
+
+[node name="HookablePole" type="Node3D" unique_id=1571854471]
+
+[node name="Hook" type="StaticBody3D" parent="." unique_id=1260084069 groups=["Hookable"]]
+collision_layer = 4
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hook" unique_id=2050343361]
+mesh = SubResource("BoxMesh_ye6dw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hook" unique_id=1430357704]
+shape = SubResource("ConcavePolygonShape3D_50vsx")
+
+[node name="Pole" type="StaticBody3D" parent="." unique_id=1723350522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1413288, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pole" unique_id=1922909449]
+mesh = SubResource("CylinderMesh_eokjp")
