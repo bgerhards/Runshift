@@ -1,0 +1,198 @@
+
+[sub_resource type="StandardMaterial3D" id="mat_a"]
+albedo_color = Color(0.32, 0.33, 0.36, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_b"]
+albedo_color = Color(0.62, 0.6, 0.57, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_c"]
+albedo_color = Color(0.5, 0.33, 0.22, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_d"]
+albedo_color = Color(0.38, 0.45, 0.55, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_e"]
+albedo_color = Color(0.2, 0.22, 0.28, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_f"]
+albedo_color = Color(0.9, 0.55, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="bm_city_01"]
+size = Vector3(6, 6, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_01"]
+size = Vector3(6, 6, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_02"]
+size = Vector3(8, 10, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_02"]
+size = Vector3(8, 10, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_03"]
+size = Vector3(6, 11, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_03"]
+size = Vector3(6, 11, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_04"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_04"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_05"]
+size = Vector3(8, 12, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_05"]
+size = Vector3(8, 12, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_06"]
+size = Vector3(10, 14, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_06"]
+size = Vector3(10, 14, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_07"]
+size = Vector3(6, 18, 6)
+
+[sub_resource type="BoxShape3D" id="bs_city_07"]
+size = Vector3(6, 18, 6)
+
+[sub_resource type="BoxMesh" id="bm_city_08"]
+size = Vector3(8, 16, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_08"]
+size = Vector3(8, 16, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_09"]
+size = Vector3(10, 20, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_09"]
+size = Vector3(10, 20, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_10"]
+size = Vector3(8, 20, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_10"]
+size = Vector3(8, 20, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_11"]
+size = Vector3(10, 22, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_11"]
+size = Vector3(10, 22, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_12"]
+size = Vector3(6, 26, 6)
+
+[sub_resource type="BoxShape3D" id="bs_city_12"]
+size = Vector3(6, 26, 6)
+
+[sub_resource type="BoxMesh" id="bm_city_13"]
+size = Vector3(10, 24, 12)
+
+[sub_resource type="BoxShape3D" id="bs_city_13"]
+size = Vector3(10, 24, 12)
+
+[sub_resource type="BoxMesh" id="bm_city_14"]
+size = Vector3(8, 30, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_14"]
+size = Vector3(8, 30, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_15"]
+size = Vector3(10, 30, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_15"]
+size = Vector3(10, 30, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_16"]
+size = Vector3(6, 35, 6)
+
+[sub_resource type="BoxShape3D" id="bs_city_16"]
+size = Vector3(6, 35, 6)
+
+[sub_resource type="BoxMesh" id="bm_city_17"]
+size = Vector3(8, 35, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_17"]
+size = Vector3(8, 35, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_18"]
+size = Vector3(6, 40, 6)
+
+[sub_resource type="BoxShape3D" id="bs_city_18"]
+size = Vector3(6, 40, 6)
+
+[sub_resource type="BoxMesh" id="bm_city_19"]
+size = Vector3(10, 40, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_19"]
+size = Vector3(10, 40, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_20"]
+size = Vector3(4, 45, 4)
+
+[sub_resource type="BoxShape3D" id="bs_city_20"]
+size = Vector3(4, 45, 4)
+
+[sub_resource type="BoxMesh" id="bm_city_21"]
+size = Vector3(4, 50, 4)
+
+[sub_resource type="BoxShape3D" id="bs_city_21"]
+size = Vector3(4, 50, 4)
+
+[sub_resource type="BoxMesh" id="bm_city_22"]
+size = Vector3(6, 50, 6)
+
+[sub_resource type="BoxShape3D" id="bs_city_22"]
+size = Vector3(6, 50, 6)
+
+[sub_resource type="BoxMesh" id="bm_city_23"]
+size = Vector3(12, 55, 12)
+
+[sub_resource type="BoxShape3D" id="bs_city_23"]
+size = Vector3(12, 55, 12)
+
+[sub_resource type="BoxMesh" id="bm_city_24"]
+size = Vector3(8, 65, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_24"]
+size = Vector3(8, 65, 8)
+
+[sub_resource type="BoxMesh" id="bm_city_25"]
+size = Vector3(4, 80, 4)
+
+[sub_resource type="BoxShape3D" id="bs_city_25"]
+size = Vector3(4, 80, 4)
+
+[sub_resource type="BoxMesh" id="bm_city_26"]
+size = Vector3(6, 25, 6)
+
+[sub_resource type="BoxShape3D" id="bs_city_26"]
+size = Vector3(6, 25, 6)
+
+[sub_resource type="BoxMesh" id="bm_city_27"]
+size = Vector3(6, 30, 6)
+
+[sub_resource type="BoxShape3D" id="bs_city_27"]
+size = Vector3(6, 30, 6)
+
+[sub_resource type="BoxMesh" id="bm_city_28"]
+size = Vector3(10, 25, 10)
+
+[sub_resource type="BoxShape3D" id="bs_city_28"]
+size = Vector3(10, 25, 10)
+
+[sub_resource type="BoxMesh" id="bm_city_29"]
+size = Vector3(4, 40, 4)
+
+[sub_resource type="BoxShape3D" id="bs_city_29"]
+size = Vector3(4, 40, 4)
+
+[sub_resource type="BoxMesh" id="bm_city_30"]
+size = Vector3(8, 40, 8)
+
+[sub_resource type="BoxShape3D" id="bs_city_30"]
+size = Vector3(8, 40, 8)
